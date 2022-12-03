@@ -1,4 +1,4 @@
-import { SideBar } from "./ui/sidebar/SideBar";
+import { SideBar } from "@/ui/sidebar/SideBar";
 
 function App() {
 	return (
