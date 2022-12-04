@@ -1,3 +1,7 @@
-.nav-item {
-	@apply text-4xl;
+.item-container {
+	@apply relative bg-primary-100 w-12 h-12 flex justify-center items-center rounded-md transition-all cursor-pointer hover:bg-green-700  hover:rounded-xl;
+}
+
+.item-tooltip {
+	@apply absolute left-16 bg-primary-100 rounded-md p-2 min-w-max font-semibold text-sm scale-0 transition-transform origin-left;
 }

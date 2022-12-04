@@ -2,7 +2,7 @@ import { SideBar } from "@/ui/sidebar/SideBar";
 
 function App() {
 	return (
-		<div className="App">
+		<div>
 			<SideBar />
 		</div>
 	);
