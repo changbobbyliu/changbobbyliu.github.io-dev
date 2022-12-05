@@ -3,5 +3,5 @@
 }
 
 .item-tooltip {
-	@apply absolute left-16 bg-primary-100 rounded-md p-2 min-w-max font-semibold text-sm scale-0 transition-transform origin-left;
+	@apply absolute left-16 bg-primary-100 rounded-md p-2 min-w-max font-semibold text-sm scale-0 transition-transform uppercase origin-left;
 }
