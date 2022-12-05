@@ -14,11 +14,9 @@ jobs:
         uses: mskelton/setup-yarn@v1
         with:
           node-version: "16.x"
-      - name: Install and Build
-        run: yarn install
-      - name: Build to production
+      - run: yarn install
+      - name: Build and deploy
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
           GH_SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        run: |
-          ./bin/deploy.sh
+        run: ./bin/deploy.sh
