@@ -2,6 +2,7 @@ import { mockData, TPortfolioItem, TSideBarCategory } from "@/config/mockdata";
 import { useGContext } from "@/managers/context/GContext";
 import { FC, PropsWithChildren, useMemo } from "react";
 import avatarURI from "@/assets/images/avatar.jpeg";
+import { C } from "@/config/constants";
 
 export const MainContent = () => {
 	const { sidebarActivePage } = useGContext();
@@ -48,6 +49,7 @@ const LandingScreen = () => {
 					</a>
 				))}
 			</div>
+			{C.env.isIn("development") && <pre>{JSON.stringify(import.meta.env, null, 2)}</pre>}
 		</div>
 	);
 };
