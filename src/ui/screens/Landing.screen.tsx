@@ -1,4 +1,3 @@
-import { C } from "@/config/constants";
 import { mockData } from "@/config/mockdata";
 import { TGQL, ContentfulService } from "@/services/contentful";
 import { useState, useEffect } from "react";
@@ -37,10 +36,19 @@ export const LandingScreen = () => {
 					</a>
 				))}
 			</div>
-			{C.env.isIn("development") && <pre>{JSON.stringify(import.meta.env, null, 2)}</pre>}
-			{C.env.isIn("development") && (
-				<p className="mx-16 break-all text-lg">{JSON.stringify(data)}</p>
-			)}
+			<div className="mt-2 grid grid-cols-2 gap-3 md:grid-cols-3 mx-auto justify-center">
+				{data.map((item) => {
+					return (
+						<div
+							key={item.sys.id}
+							className="bg-gray-100/80 max-w-[16rem] rounded-lg shadow-lg transition-all cursor-pointer hover:brightness-105 hover:-translate-y-[1px]"
+						>
+							<img className="my-1" src={item.featuredImage.url} />
+							<p className="mb-2 text-center text-gray-900">{item.name}</p>
+						</div>
+					);
+				})}
+			</div>
 		</div>
 	);
 };
