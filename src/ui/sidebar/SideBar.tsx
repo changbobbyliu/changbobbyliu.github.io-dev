@@ -1,7 +1,7 @@
 import { mockData } from "@/config/mockdata";
 import { useGContext } from "@/managers/context/GContext";
 import { FC, useMemo } from "react";
-import { DarkModeSwitch } from "../dark-mode-switch/DarkModeSwitch";
+import { DarkModeSwitch } from "../components/DarkModeSwitch.component";
 import styles from "./SideBar.module.css";
 
 export function SideBar() {
