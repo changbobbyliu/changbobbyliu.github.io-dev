@@ -25,5 +25,10 @@ export const C = {
 	env: {
 		modes: envModes,
 		isIn: (env: typeof envModes[number]) => import.meta.env.MODE === env,
+		contentful: {
+			spaceID: import.meta.env.VITE_CONTENTFUL_SPACE_ID,
+			cdaToken: import.meta.env.VITE_CONTENTFUL_CDA_TOKEN,
+			cpaToken: import.meta.env.VITE_CONTENTFUL_CPA_TOKEN,
+		},
 	},
 };

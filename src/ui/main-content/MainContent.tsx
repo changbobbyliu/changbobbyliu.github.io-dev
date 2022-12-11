@@ -1,8 +1,9 @@
 import { mockData, TPortfolioItem, TSideBarCategory } from "@/config/mockdata";
 import { useGContext } from "@/managers/context/GContext";
-import { FC, PropsWithChildren, useMemo } from "react";
+import { FC, PropsWithChildren, useEffect, useMemo, useState } from "react";
 import avatarURI from "@/assets/images/avatar.jpeg";
 import { C } from "@/config/constants";
+import { ContentfulService, type TGQL } from "@/services/contentful";
 
 export const MainContent = () => {
 	const { sidebarActivePage } = useGContext();
@@ -31,6 +32,19 @@ const H1: FC<PropsWithChildren<{ containerClassName?: string }>> = ({
 };
 
 const LandingScreen = () => {
+	const [data, setData] = useState<TGQL["topicProductCollection"]>([]);
+
+	useEffect(() => {
+		ContentfulService.getInstance()
+			.get("topicProductCollection")
+			.then((res) => {
+				setData(res);
+			})
+			.catch((err) => {
+				alert("Error: " + err.message || "Unknown error");
+			});
+	}, []);
+
 	return (
 		<div className="flex flex-col items-center">
 			<img src={avatarURI} className="rounded-full w-48 mt-24" />
@@ -50,6 +64,9 @@ const LandingScreen = () => {
 				))}
 			</div>
 			{C.env.isIn("development") && <pre>{JSON.stringify(import.meta.env, null, 2)}</pre>}
+			{C.env.isIn("development") && (
+				<p className="mx-16 break-all text-lg">{JSON.stringify(data)}</p>
+			)}
 		</div>
 	);
 };
