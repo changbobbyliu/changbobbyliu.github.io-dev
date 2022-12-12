@@ -1,22 +1,13 @@
 import { mockData } from "@/config/mockdata";
-import { TGQL, ContentfulService } from "@/services/contentful";
-import { useState, useEffect } from "react";
+import { ContentfulService } from "@/services/contentful";
 import { H1 } from "../components";
 import avatarURI from "@/assets/images/avatar.jpeg";
+import { useQuery } from "react-query";
 
 export const LandingScreen = () => {
-	const [data, setData] = useState<TGQL["topicProductCollection"]>([]);
-
-	useEffect(() => {
-		ContentfulService.getInstance()
-			.get("topicProductCollection")
-			.then((res) => {
-				setData(res);
-			})
-			.catch((err) => {
-				alert("Error: " + err.message || "Unknown error");
-			});
-	}, []);
+	const { data, error, isError, isLoading } = useQuery("topicProductCollection", () =>
+		ContentfulService.getInstance().get("topicProductCollection")
+	);
 
 	return (
 		<div className="flex flex-col items-center">
@@ -38,18 +29,25 @@ export const LandingScreen = () => {
 			</div>
 
 			<H1 containerClassName="mb-4">📚 My Topics</H1>
+
+			{/* TODO: add skeleton loading */}
+			{isLoading && <div className="text-gray-500">Loading...</div>}
+
+			{isError && <div className="text-red-500">{`Error: ${error}`}</div>}
+
 			<div className="mx-8 mb-16 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 justify-center">
-				{data.map((item) => {
-					return (
-						<div
-							key={item.sys.id}
-							className="bg-gray-200/75 dark:bg-primary/50 flex flex-col rounded-lg shadow-lg transition-all cursor-pointer hover:brightness-105 hover:-translate-y-[1px] overflow-hidden"
-						>
-							<img className="my-1 object-contain h-3/4" src={item.featuredImage.url} />
-							<p className="mb-2 text-center">{item.name}</p>
-						</div>
-					);
-				})}
+				{data &&
+					data.map((item) => {
+						return (
+							<div
+								key={item.sys.id}
+								className="bg-gray-200/75 dark:bg-primary/50 flex flex-col rounded-lg shadow-lg transition-all cursor-pointer hover:brightness-105 hover:-translate-y-[1px] overflow-hidden"
+							>
+								<img className="my-1 object-contain h-3/4" src={item.featuredImage.url} />
+								<p className="mb-2 text-center">{item.name}</p>
+							</div>
+						);
+					})}
 			</div>
 		</div>
 	);
