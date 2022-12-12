@@ -12,9 +12,7 @@ export const DarkModeSwitch = () => {
 				}
 			}}
 		>
-			<div
-				className={`bg-red-500 relative transition-transform ${darkMode ? "" : "-translate-x-12"}`}
-			>
+			<div className={`relative transition-transform ${darkMode ? "" : "-translate-x-12"}`}>
 				<span className="text-2xl w-12 h-12 bg-primary-100 absolute top-0 left-0 flex justify-center items-center">
 					🌛
 				</span>

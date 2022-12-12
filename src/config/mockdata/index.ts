@@ -48,8 +48,9 @@ const socials: { icon: NSChangGlobal.TIconName; tintClassName?: string; url: str
 const techstacks = [
 	"React",
 	"React Native",
-	"Java",
-	"Objective-c",
+	"JavaScript/TypeScript",
+	"Android/Java/Kotlin",
+	"iOS/Swift/Objective-C",
 	"Nextjs",
 	"Solidity",
 	"Cocos Creator",
