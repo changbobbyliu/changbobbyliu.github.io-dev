@@ -29,22 +29,24 @@ export const LandingScreen = () => {
 				</a>{" "}
 				as a software engineer.
 			</p>
-			<div className="space-x-3 my-8">
+			<div className="space-x-3 mt-8 mb-16">
 				{mockData.socials.map(({ icon, url, tintClassName = "" }) => (
 					<a href={url} target="_blank">
 						<i className={`iconfont ${icon} text-4xl ${tintClassName}`}></i>
 					</a>
 				))}
 			</div>
-			<div className="mt-2 grid grid-cols-2 gap-3 md:grid-cols-3 mx-auto justify-center">
+
+			<H1 containerClassName="mb-4">📚 My Topics</H1>
+			<div className="mx-8 mb-16 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 justify-center">
 				{data.map((item) => {
 					return (
 						<div
 							key={item.sys.id}
-							className="bg-gray-100/80 max-w-[16rem] rounded-lg shadow-lg transition-all cursor-pointer hover:brightness-105 hover:-translate-y-[1px]"
+							className="bg-gray-200/75 dark:bg-primary/50 flex flex-col rounded-lg shadow-lg transition-all cursor-pointer hover:brightness-105 hover:-translate-y-[1px] overflow-hidden"
 						>
-							<img className="my-1" src={item.featuredImage.url} />
-							<p className="mb-2 text-center text-gray-900">{item.name}</p>
+							<img className="my-1 object-contain h-3/4" src={item.featuredImage.url} />
+							<p className="mb-2 text-center">{item.name}</p>
 						</div>
 					);
 				})}
