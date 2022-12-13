@@ -19,4 +19,8 @@ jobs:
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
           GH_SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          VITE_INIT_ADMIN_USER: ${{ secrets.VITE_INIT_ADMIN_USER }}
+          VITE_CONTENTFUL_SPACE_ID: ${{ secrets.VITE_CONTENTFUL_SPACE_ID }}
+          VITE_CONTENTFUL_CDA_TOKEN: ${{ secrets.VITE_CONTENTFUL_CDA_TOKEN }}
+          VITE_CONTENTFUL_CPA_TOKEN: ${{ secrets.VITE_CONTENTFUL_CPA_TOKEN }}
         run: ./bin/deploy.sh

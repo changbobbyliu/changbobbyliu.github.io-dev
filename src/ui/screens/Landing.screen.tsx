@@ -28,7 +28,7 @@ export const LandingScreen = () => {
 				))}
 			</div>
 
-			<H1 containerClassName="mb-4">📚 My Topics</H1>
+			<H1 containerClassName="mb-4">{`📚 My Topics (${import.meta.env.VITE_INIT_ADMIN_USER})`}</H1>
 
 			{/* TODO: add skeleton loading */}
 			{isLoading && <div className="text-gray-500">Loading...</div>}
