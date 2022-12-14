@@ -13,7 +13,7 @@ const gql = {
 };
 
 export type TGQL = {
-	topicProductCollection: { sys: { id: string }; name: string; featuredImage: { url: string } }[];
+	topicProductCollection: NSDTO.TMyTopic[];
 };
 
 export class ContentfulService {
@@ -45,7 +45,10 @@ export class ContentfulService {
 		});
 	}
 
-	async get(query: keyof TGQL, config: { isPreview?: boolean; env?: "master" | "dev" } = {}) {
+	async get(
+		query: keyof TGQL,
+		config: { isPreview?: boolean; env?: "master" | "dev"; delay?: number } = {}
+	) {
 		const promise: Promise<TGQL[typeof query]> = fetch(
 			`https://graphql.contentful.com/content/v1/spaces/${
 				import.meta.env.VITE_CONTENTFUL_SPACE_ID
@@ -57,6 +60,13 @@ export class ContentfulService {
 			.then((res) => res[query])
 			.then((res) => res.items);
 
+		if (config.delay) {
+			return new Promise<TGQL[typeof query]>((resolve) => {
+				setTimeout(() => {
+					resolve(promise);
+				}, config.delay);
+			});
+		}
 		return promise;
 	}
 }

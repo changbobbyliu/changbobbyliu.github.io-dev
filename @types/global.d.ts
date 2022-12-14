@@ -10,3 +10,7 @@ interface ImportMetaEnv {
 declare namespace NSChangGlobal {
 	type TIconName = typeof import("@/config/constants").C.iconNames[number];
 }
+
+declare namespace NSDTO {
+	type TMyTopic = { sys: { id: string }; name: string; featuredImage: { url: string } };
+}
