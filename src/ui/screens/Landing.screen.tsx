@@ -7,7 +7,7 @@ import avatarURI from "@/assets/images/avatar.jpeg";
 
 export const LandingScreen = () => {
 	const { data, error, isError, isLoading } = useQuery("topicProductCollection", () =>
-		ContentfulService.getInstance().get("topicProductCollection", { delay: 500000 })
+		ContentfulService.getInstance().get("topicProductCollection")
 	);
 
 	return (
