@@ -7,7 +7,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 const queryClient = new QueryClient({
 	defaultOptions: {
 		queries: {
-			staleTime: Infinity,
+			staleTime: 900_000, // Infinity
 		},
 	},
 });
