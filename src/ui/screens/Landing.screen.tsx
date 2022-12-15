@@ -23,7 +23,7 @@ export const LandingScreen = () => {
 			</p>
 			<div className="space-x-3 mt-8 mb-16">
 				{mockData.socials.map(({ icon, url, tintClassName = "" }) => (
-					<a href={url} target="_blank">
+					<a key={url} href={url} target="_blank">
 						<i className={`iconfont ${icon} text-4xl ${tintClassName}`}></i>
 					</a>
 				))}
@@ -36,7 +36,7 @@ export const LandingScreen = () => {
 			) : (
 				<div className="mx-8 mb-16 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 justify-center">
 					{isLoading && <SkeletonLoading />}
-					{data && data.map((item) => <MyTopicListItem item={item} />)}
+					{data && data.map((item) => <MyTopicListItem key={item.sys.id} item={item} />)}
 				</div>
 			)}
 		</div>
