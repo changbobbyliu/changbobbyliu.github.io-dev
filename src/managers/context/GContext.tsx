@@ -1,3 +1,4 @@
+import { C } from "@/config/constants";
 import { ContentfulService } from "@/services/contentful";
 import {
 	createContext,
@@ -19,7 +20,7 @@ type TContext = {
 const GContext = createContext<TContext>(undefined!);
 
 export const GProvider: FC<PropsWithChildren> = ({ children }) => {
-	const [sidebarActivePage, setSidebarActivePage] = useState("Landing");
+	const [sidebarActivePage, setSidebarActivePage] = useState(C.navigation.landing);
 
 	const { data: portfolioData } = useQuery(
 		"portfolios",

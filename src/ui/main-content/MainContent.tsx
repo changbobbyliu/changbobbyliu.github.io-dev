@@ -1,3 +1,4 @@
+import { C } from "@/config/constants";
 import { useGContext } from "@/managers/context/GContext";
 
 import { LandingScreen } from "@/ui/screens/Landing.screen";
@@ -8,7 +9,7 @@ export const MainContent = () => {
 
 	const mapCategoryToScreen = () => {
 		switch (sidebarActivePage) {
-			case "Landing":
+			case C.navigation.landing:
 				return <LandingScreen />;
 			default:
 				return <PortfolioScreen />;

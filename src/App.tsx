@@ -3,6 +3,7 @@ import { GProvider, useGContext } from "@/managers/context/GContext";
 import { MainContent } from "@/ui/main-content/MainContent";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { C } from "./config/constants";
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -28,7 +29,7 @@ function AppUI() {
 	return (
 		<div>
 			<SideBar
-				categories={["Landing", ...categories]}
+				categories={[C.navigation.landing, ...categories]}
 				activeCategory={sidebarActivePage}
 				setActiveCategory={setSidebarActivePage}
 			/>

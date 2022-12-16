@@ -27,7 +27,7 @@ export const PortfolioScreen: FC = () => {
 					))}
 				</ul>
 			) : (
-				<p className="text-center">No items found</p>
+				<p className="text-center text-gray-400">No items found</p>
 			)}
 		</div>
 	);
