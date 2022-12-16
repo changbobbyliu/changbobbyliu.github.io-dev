@@ -23,7 +23,7 @@ declare namespace NSDTO {
 		description: string;
 		techs: string[];
 		url: string;
-		previewImage: { url: string };
+		previewImage?: { url: string } | null;
 		categoriesCollection: { items: TPortfolioCategory[] };
 	};
 }

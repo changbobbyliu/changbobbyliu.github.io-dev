@@ -3,6 +3,7 @@ import { ContentfulService } from "@/services/contentful";
 import { FC, useMemo } from "react";
 import { useQuery } from "react-query";
 import { H1 } from "../components";
+import styles from "./Portfolio.module.css";
 
 export const PortfolioScreen: FC = () => {
 	const { sidebarActivePage } = useGContext();
@@ -17,11 +18,11 @@ export const PortfolioScreen: FC = () => {
 	}, [data, sidebarActivePage]);
 
 	return (
-		<div>
+		<div className="pb-8">
 			<H1 containerClassName="text-center py-8">{sidebarActivePage}</H1>
 
 			{itemsForActiveCategory?.length ? (
-				<ul className="mx-2 mt-4">
+				<ul className="mx-2 grid gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 					{itemsForActiveCategory.map((item) => (
 						<PortfolioItem key={item.sys.id} item={item} />
 					))}
@@ -33,12 +34,40 @@ export const PortfolioScreen: FC = () => {
 	);
 };
 
-const PortfolioItem: FC<{ item: NSDTO.TPortfolio }> = ({ item: { name, url } }) => {
+const PortfolioItem: FC<{ item: NSDTO.TPortfolio }> = ({ item }) => {
+	const {
+		name,
+		description,
+		techs,
+		url,
+		previewImage,
+		categoriesCollection: { items: categories },
+	} = item;
+
 	return (
-		<li>
-			👉{" "}
-			<a href={url} target="_blank" className="underline">
-				{name}
+		<li
+			className={`relative rounded-lg overflow-hidden bg-slate-600 text-white dark:bg-white dark:text-black group ${styles.hover}`}
+		>
+			<a href={url} target="_blank" className="flex flex-col">
+				<div className="min-h-[120px] min-w-[200px] md:h-[220px] lg:h-[300px] overflow-hidden">
+					<img
+						src={`${previewImage ? previewImage.url : "/img/portfolio-preview.jpeg"}`}
+						className="object-cover group-hover:scale-105 transition-transform duration-300"
+					/>
+				</div>
+				<div className="p-2">
+					<h3 className="text-lg font-semibold">{name}</h3>
+					<p className="text-sm mb-3">{description}</p>
+					<div className="flex gap-2">
+						{[...categories.map((cat) => cat.name), ...techs].map((item) => {
+							return (
+								<span key={item} className="px-2 text-sm rounded-full bg-orange-300">
+									{item}
+								</span>
+							);
+						})}
+					</div>
+				</div>
 			</a>
 		</li>
 	);
