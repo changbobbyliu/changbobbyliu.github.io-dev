@@ -26,9 +26,9 @@ export function useMedia<T>(queries: string[], values: T[], defaultValue: T) {
 			// ... current values of hook args (as this hook callback is created once on mount).
 			const handler = () => setValue(getValue);
 			// Set a listener for each media query with above handler as callback.
-			mediaQueryLists.forEach((mql) => mql.addListener(handler));
+			mediaQueryLists.forEach((mql) => mql.addEventListener("change", handler));
 			// Remove listeners on cleanup
-			return () => mediaQueryLists.forEach((mql) => mql.removeListener(handler));
+			return () => mediaQueryLists.forEach((mql) => mql.removeEventListener("change", handler));
 		},
 		[] // Empty array ensures effect is only run on mount and unmount
 	);

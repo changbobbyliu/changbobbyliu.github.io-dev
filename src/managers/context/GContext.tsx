@@ -1,3 +1,5 @@
+import { C } from "@/config/constants";
+import { ContentfulService } from "@/services/contentful";
 import {
 	createContext,
 	Dispatch,
@@ -7,19 +9,33 @@ import {
 	useContext,
 	useState,
 } from "react";
+import { useQuery } from "react-query";
 
 type TContext = {
 	sidebarActivePage: string;
 	setSidebarActivePage: Dispatch<SetStateAction<string>>;
+	categories: string[];
 };
 
 const GContext = createContext<TContext>(undefined!);
 
 export const GProvider: FC<PropsWithChildren> = ({ children }) => {
-	const [sidebarActivePage, setSidebarActivePage] = useState("landing");
+	const [sidebarActivePage, setSidebarActivePage] = useState(C.navigation.landing);
+
+	const { data: portfolioData } = useQuery(
+		"portfolios",
+		() => ContentfulService.getInstance().getPortfolio(),
+		{ staleTime: 24 * 3_600_000 }
+	);
 
 	return (
-		<GContext.Provider value={{ sidebarActivePage, setSidebarActivePage }}>
+		<GContext.Provider
+			value={{
+				sidebarActivePage,
+				setSidebarActivePage,
+				categories: portfolioData?.portfolioCategories.map((item) => item.name) || [],
+			}}
+		>
 			{children}
 		</GContext.Provider>
 	);

@@ -31,4 +31,7 @@ export const C = {
 			cpaToken: import.meta.env.VITE_CONTENTFUL_CPA_TOKEN,
 		},
 	},
+	navigation: {
+		landing: "Landing",
+	},
 };

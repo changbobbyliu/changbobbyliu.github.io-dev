@@ -1,0 +1,3 @@
+.hover {
+	@apply after:content-[''] after:w-full after:h-full after:absolute after:top-0 after:left-0 after:pointer-events-none after:transition-colors hover:after:bg-white/10;
+}
