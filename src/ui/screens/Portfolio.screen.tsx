@@ -49,10 +49,10 @@ const PortfolioItem: FC<{ item: NSDTO.TPortfolio }> = ({ item }) => {
 			className={`relative rounded-lg overflow-hidden bg-slate-600 text-white dark:bg-white dark:text-black group ${styles.hover}`}
 		>
 			<a href={url} target="_blank" className="flex flex-col">
-				<div className="min-h-[120px] min-w-[200px] md:h-[220px] lg:h-[300px] overflow-hidden">
+				<div className="min-h-[120px] min-w-[200px] md:h-[220px] overflow-hidden">
 					<img
 						src={`${previewImage ? previewImage.url : "/img/portfolio-preview.jpeg"}`}
-						className="object-cover group-hover:scale-105 transition-transform duration-300"
+						className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
 					/>
 				</div>
 				<div className="p-2">
