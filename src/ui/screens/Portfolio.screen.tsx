@@ -58,7 +58,7 @@ const PortfolioItem: FC<{ item: NSDTO.TPortfolio }> = ({ item }) => {
 				<div className="p-2">
 					<h3 className="text-lg font-semibold">{name}</h3>
 					<p className="text-sm mb-3">{description}</p>
-					<div className="flex gap-2">
+					<div className="flex gap-2 flex-wrap">
 						{[...categories.map((cat) => cat.name), ...techs].map((item) => {
 							return (
 								<span key={item} className="px-2 text-sm rounded-full bg-orange-300">
