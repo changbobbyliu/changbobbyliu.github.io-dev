@@ -43,7 +43,7 @@ export const LandingScreen = () => {
 	);
 };
 
-const MyTopicListItem: FC<{ item: NSDTO.TMyTopic }> = ({ item }) => {
+const MyTopicListItem: FC<{ item: NSContentful.DTO.TMyTopic }> = ({ item }) => {
 	return (
 		<div
 			key={item.sys.id}

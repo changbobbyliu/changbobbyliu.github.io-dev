@@ -4,6 +4,7 @@ import { MainContent } from "@/ui/main-content/MainContent";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { C } from "./config/constants";
+import { useInitApp } from "./hooks/features/useInitApp";
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -14,6 +15,8 @@ const queryClient = new QueryClient({
 });
 
 function App() {
+	const isInit = useInitApp();
+	if (!isInit) return null;
 	return (
 		<QueryClientProvider client={queryClient}>
 			<ReactQueryDevtools initialIsOpen={false} position="top-right" />
