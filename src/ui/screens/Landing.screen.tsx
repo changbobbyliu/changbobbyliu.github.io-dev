@@ -13,7 +13,7 @@ export const LandingScreen = () => {
 	return (
 		<div className="flex flex-col items-center">
 			<img src={avatarURI} className="rounded-full w-48 mt-24" />
-			<H1 containerClassName="mt-4">👋 Hello, Friend!</H1>
+			<H1 containerClassName="mt-4">👋 Hello, Friend (v0.0.2)</H1>
 			<p className="text-center mt-6 max-w-md">
 				I'm Chang, a software engineer from China. I'm currently working at{" "}
 				<a href="https://daily-harvest.com" target="_blank" rel="noreferrer">
