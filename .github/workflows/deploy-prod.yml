@@ -10,8 +10,6 @@ jobs:
     steps:
       - name: Clone to vm
         uses: actions/checkout@v2
-        with:
-          submodules: recursive
       - name: Setup yarn
         uses: mskelton/setup-yarn@v1
         with:
