@@ -1,3 +1,6 @@
 [submodule "gh-page"]
 	path = gh-page
 	url = git@github.com:changbobbyliu/changbobbyliu.github.io.git
+[submodule "src/services/contentful"]
+	path = src/services/contentful
+	url = git@github.com:changbobbyliu/boobareth-contentful-api.git

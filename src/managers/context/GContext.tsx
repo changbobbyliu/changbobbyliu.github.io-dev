@@ -9,7 +9,6 @@ import {
 	useContext,
 	useState,
 } from "react";
-import { useQuery } from "react-query";
 
 type TContext = {
 	sidebarActivePage: string;
@@ -22,18 +21,14 @@ const GContext = createContext<TContext>(undefined!);
 export const GProvider: FC<PropsWithChildren> = ({ children }) => {
 	const [sidebarActivePage, setSidebarActivePage] = useState(C.navigation.landing);
 
-	const { data: portfolioData } = useQuery(
-		"portfolios",
-		() => ContentfulService.getInstance().getPortfolio(),
-		{ staleTime: 24 * 3_600_000 }
-	);
+	const { data: portfolioData } = ContentfulService.useGetPortfolioQuery();
 
 	return (
 		<GContext.Provider
 			value={{
 				sidebarActivePage,
 				setSidebarActivePage,
-				categories: portfolioData?.portfolioCategories.map((item) => item.name) || [],
+				categories: portfolioData?.portfolioCategoryCollection.map((item) => item.name) || [],
 			}}
 		>
 			{children}

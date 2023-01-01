@@ -1,18 +1,15 @@
 import { useGContext } from "@/managers/context/GContext";
 import { ContentfulService } from "@/services/contentful";
 import { FC, useMemo } from "react";
-import { useQuery } from "react-query";
 import { H1 } from "../components";
 import styles from "./Portfolio.module.css";
 
 export const PortfolioScreen: FC = () => {
 	const { sidebarActivePage } = useGContext();
-	const { data } = useQuery("portfolios", () => ContentfulService.getInstance().getPortfolio(), {
-		staleTime: 24 * 3_600_000, // 1 day
-	});
+	const { data } = ContentfulService.useGetPortfolioQuery();
 
 	const itemsForActiveCategory = useMemo(() => {
-		return data?.portfolios.filter((item) => {
+		return data?.portfolioCollection.filter((item) => {
 			return item.categoriesCollection.items.some((value) => value.name === sidebarActivePage);
 		});
 	}, [data, sidebarActivePage]);
@@ -34,7 +31,7 @@ export const PortfolioScreen: FC = () => {
 	);
 };
 
-const PortfolioItem: FC<{ item: NSDTO.TPortfolio }> = ({ item }) => {
+const PortfolioItem: FC<{ item: NSContentful.DTO.TPortfolio }> = ({ item }) => {
 	const {
 		name,
 		description,
