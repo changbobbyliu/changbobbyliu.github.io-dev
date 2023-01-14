@@ -1,7 +1,7 @@
 import { C } from "@/config/constants";
 import { useGContext } from "@/managers/context/GContext";
 
-import { LandingScreen } from "@/ui/screens/Landing.screen";
+import { LandingScreen } from "@/ui/screens/landing/Landing.screen";
 import { PortfolioScreen } from "../screens/Portfolio.screen";
 
 export const MainContent = () => {

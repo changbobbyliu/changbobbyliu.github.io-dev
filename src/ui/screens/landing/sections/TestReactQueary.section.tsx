@@ -1,41 +1,18 @@
 import { FC } from "react";
 import { useQuery } from "react-query";
-import { mockData } from "@/config/mockdata";
+import { H1 } from "@/ui/components";
 import { ContentfulService } from "@/services/contentful";
-import { H1 } from "../components";
-import avatarURI from "@/assets/images/avatar.jpeg";
 
-export const LandingScreen = () => {
+export const TestReactQuearySection: FC<{ containerClassName?: string }> = ({
+	containerClassName = "",
+}) => {
 	const { data, error, isError, isLoading } = useQuery("topicProductCollection", () =>
 		ContentfulService.getInstance().getTopicProductCollection()
 	);
 
 	return (
-		<div className="flex flex-col items-center">
-			<img src={avatarURI} className="rounded-full w-48 mt-24" />
-			<H1 containerClassName="mt-4">👋 Hello, Friend (v0.0.2)</H1>
-			<p className="text-center mt-6 max-w-md">
-				I'm Chang, a software engineer from China. I'm currently working at{" "}
-				<a
-					href="https://daily-harvest.com/r/RE-2V6LLKB"
-					target="_blank"
-					rel="noreferrer"
-					className="underline font-mono underline-offset-4 text-accent hover:brightness-110"
-				>
-					DAILY HARVEST
-				</a>{" "}
-				as a software engineer.
-			</p>
-
-			<div className="space-x-3 mt-8 mb-16">
-				{mockData.socials.map(({ icon, url, tintClassName = "" }) => (
-					<a key={url} href={url} target="_blank">
-						<i className={`iconfont ${icon} text-4xl ${tintClassName}`}></i>
-					</a>
-				))}
-			</div>
-
-			<H1 containerClassName="mb-4">{`📚 My Topics (${import.meta.env.VITE_INIT_ADMIN_USER})`}</H1>
+		<div className={`${containerClassName} flex flex-col items-center`}>
+			<H1 containerClassName="mb-8">{`📚 My Topics (${import.meta.env.VITE_INIT_ADMIN_USER})`}</H1>
 
 			{isError ? (
 				<div className="text-red-500">{`Error: ${error}`}</div>
