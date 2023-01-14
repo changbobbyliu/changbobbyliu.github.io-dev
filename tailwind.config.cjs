@@ -10,6 +10,7 @@ module.exports = {
 					100: "#2f3136",
 				},
 				secondary: "#5865f2",
+				accent: "#17c3b2", // Tiffany Blue
 			},
 		},
 	},

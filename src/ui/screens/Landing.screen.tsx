@@ -16,11 +16,17 @@ export const LandingScreen = () => {
 			<H1 containerClassName="mt-4">👋 Hello, Friend (v0.0.2)</H1>
 			<p className="text-center mt-6 max-w-md">
 				I'm Chang, a software engineer from China. I'm currently working at{" "}
-				<a href="https://daily-harvest.com" target="_blank" rel="noreferrer">
+				<a
+					href="https://daily-harvest.com/r/RE-2V6LLKB"
+					target="_blank"
+					rel="noreferrer"
+					className="underline font-mono underline-offset-4 text-accent hover:brightness-110"
+				>
 					DAILY HARVEST
 				</a>{" "}
 				as a software engineer.
 			</p>
+
 			<div className="space-x-3 mt-8 mb-16">
 				{mockData.socials.map(({ icon, url, tintClassName = "" }) => (
 					<a key={url} href={url} target="_blank">
