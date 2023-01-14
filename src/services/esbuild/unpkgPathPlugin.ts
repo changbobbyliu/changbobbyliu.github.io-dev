@@ -35,14 +35,15 @@ export const unpkgPathPlugin = () => {
 				if (args.path === "index.js") {
 					return {
 						loader: "jsx",
+						// 10. Possible to specify version, like react@16.0.0
 						contents: `
-              let message = require('nested-test-pkg');
-              console.log(message);
+              import React, {useEffect} from 'react';
+              console.log(React, useEffect);
             `,
 					};
 				}
 
-				// 10. Fetch the file from unpkg
+				// 11. Fetch the file from unpkg
 				const result = await fetch(args.path);
 				console.log("path:", new URL("./", result.url).pathname);
 				return {

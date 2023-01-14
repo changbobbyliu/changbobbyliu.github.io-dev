@@ -39,6 +39,10 @@ export class EsbuildService {
 			bundle: true,
 			write: false,
 			plugins: [unpkgPathPlugin()],
+			define: {
+				// define works like macro defines
+				global: "window",
+			},
 		}
 	) => {
 		try {
