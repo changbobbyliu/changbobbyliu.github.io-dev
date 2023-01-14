@@ -1,4 +1,5 @@
-import esbuild, { TransformOptions } from "esbuild-wasm";
+import esbuild, { BuildOptions, TransformOptions } from "esbuild-wasm";
+import { unpkgPathPlugin } from "./unpkgPathPlugin";
 
 const startService = async (onError?: (error: Error) => void) => {
 	return esbuild
@@ -28,6 +29,24 @@ export class EsbuildService {
 			if (error instanceof Error && error.message.includes("initialize")) {
 				await startService();
 				return esbuild.transform(input || "", options);
+			}
+		}
+	};
+
+	static build = async (
+		options: BuildOptions = {
+			entryPoints: ["index.js"],
+			bundle: true,
+			write: false,
+			plugins: [unpkgPathPlugin()],
+		}
+	) => {
+		try {
+			return esbuild.build(options);
+		} catch (error) {
+			if (error instanceof Error && error.message.includes("initialize")) {
+				await startService();
+				return esbuild.build(options);
 			}
 		}
 	};
