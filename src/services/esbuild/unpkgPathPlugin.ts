@@ -1,4 +1,5 @@
-import { OnLoadArgs, OnResolveArgs, PluginBuild } from "esbuild-wasm";
+import { C } from "@/config/constants";
+import { OnLoadArgs, OnLoadResult, OnResolveArgs, PluginBuild } from "esbuild-wasm";
 
 export const unpkgPathPlugin = () => {
 	return {
@@ -43,14 +44,19 @@ export const unpkgPathPlugin = () => {
 					};
 				}
 
-				// 11. Fetch the file from unpkg
-				const result = await fetch(args.path);
-				console.log("path:", new URL("./", result.url).pathname);
-				return {
+				// 11. Check if file is in cache
+				const cachedResult = await C.fileCache.getItem<OnLoadResult>(args.path);
+				if (cachedResult) return cachedResult;
+
+				// 12. Fetch the file from unpkg
+				const resData = await fetch(args.path);
+				const result: OnLoadResult = {
 					loader: "jsx",
-					contents: await result.text(),
-					resolveDir: new URL("./", result.url).pathname,
+					contents: await resData.text(),
+					resolveDir: new URL("./", resData.url).pathname,
 				};
+				await C.fileCache.setItem(args.path, result);
+				return result;
 			});
 		},
 	};

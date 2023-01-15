@@ -1,3 +1,5 @@
+import localforage from "localforage";
+
 const iconNames = [
 	"icEdit",
 	"icTree",
@@ -34,4 +36,7 @@ export const C = {
 	navigation: {
 		landing: "Landing",
 	},
+
+	// storage
+	fileCache: localforage.createInstance({ name: "fileCache" }),
 };
