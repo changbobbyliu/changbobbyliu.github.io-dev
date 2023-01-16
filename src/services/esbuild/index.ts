@@ -1,5 +1,5 @@
 import esbuild, { BuildOptions, TransformOptions } from "esbuild-wasm";
-import { unpkgPathPlugin } from "./unpkgPathPlugin";
+import { unpkgPathPlugin, fetchPlugin } from "./plugins";
 
 const startService = async (onError?: (error: Error) => void) => {
 	return esbuild
@@ -39,7 +39,7 @@ export class EsbuildService {
 			entryPoints: ["index.js"],
 			bundle: true,
 			write: false,
-			plugins: [unpkgPathPlugin(inputCode)],
+			plugins: [unpkgPathPlugin(), fetchPlugin(inputCode)],
 			define: {
 				// define works like macro defines
 				global: "window",
