@@ -1,6 +1,16 @@
 import esbuild, { OnLoadResult } from "esbuild-wasm";
 import { C } from "@/config/constants";
 
+const isCss = (path: string) => path.endsWith(".css");
+async function getContent(path: string, resData: Response) {
+	const resText = await resData.text();
+	if (isCss(path)) {
+		const escaped = resText.replace(/\n/g, "").replace(/"/g, '\\"').replace(/'/g, "\\'");
+		return `const style = document.createElement('style');style.innerText = '${escaped}';document.head.appendChild(style);`;
+	}
+	return resText;
+}
+
 export const fetchPlugin = (inputCode: string): esbuild.Plugin => ({
 	name: "fetch-plugin",
 	setup(build: esbuild.PluginBuild) {
@@ -16,32 +26,10 @@ export const fetchPlugin = (inputCode: string): esbuild.Plugin => ({
 			const cachedResult = await C.fileCache.getItem<OnLoadResult>(args.path);
 			if (cachedResult) return cachedResult;
 			// 11. move to next onLoad till return is not undefined/null/etc
-		});
 
-		// handle css
-		build.onLoad({ filter: /\.css$/ }, async (args) => {
 			const resData = await fetch(args.path);
-			const contents = await resData
-				.text()
-				.then((rawText) => rawText.replace(/\n/g, "").replace(/"/g, '\\"').replace(/'/g, "\\'"))
-				.then(
-					(escaped) =>
-						`const style = document.createElement('style');style.innerText = '${escaped}';document.head.appendChild(style);`
-				);
-			const result: OnLoadResult = {
-				loader: "jsx",
-				contents,
-				resolveDir: new URL("./", resData.url).pathname,
-			};
-			await C.fileCache.setItem(args.path, result);
-			return result;
-		});
+			const contents = await getContent(args.path, resData);
 
-		// 9. if import -> run onResolve again
-		build.onLoad({ filter: /.*/ }, async (args) => {
-			// 12. Fetch the file from unpkg
-			const resData = await fetch(args.path);
-			const contents = await resData.text();
 			const result: OnLoadResult = {
 				loader: "jsx",
 				contents,
