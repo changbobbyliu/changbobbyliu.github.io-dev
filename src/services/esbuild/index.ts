@@ -4,7 +4,8 @@ import { unpkgPathPlugin, fetchPlugin } from "./plugins";
 const startService = async (onError?: (error: Error) => void) => {
 	return esbuild
 		.initialize({
-			wasmURL: "/esbuild.wasm",
+			// TODO: validate this is the correct version in ci check
+			wasmURL: "https://unpkg.com/esbuild-wasm@0.17.0/esbuild.wasm",
 			worker: true,
 		})
 		.then(() => true)
