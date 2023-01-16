@@ -34,11 +34,12 @@ export class EsbuildService {
 	};
 
 	static build = async (
+		inputCode: string,
 		options: BuildOptions = {
 			entryPoints: ["index.js"],
 			bundle: true,
 			write: false,
-			plugins: [unpkgPathPlugin()],
+			plugins: [unpkgPathPlugin(inputCode)],
 			define: {
 				// define works like macro defines
 				global: "window",

@@ -1,7 +1,7 @@
 import { C } from "@/config/constants";
 import { OnLoadArgs, OnLoadResult, OnResolveArgs, PluginBuild } from "esbuild-wasm";
 
-export const unpkgPathPlugin = () => {
+export const unpkgPathPlugin = (inputCode: string) => {
 	return {
 		name: "unpkg-path-plugin",
 		setup(build: PluginBuild) {
@@ -37,10 +37,7 @@ export const unpkgPathPlugin = () => {
 					return {
 						loader: "jsx",
 						// 10. Possible to specify version, like react@16.0.0
-						contents: `
-              import React, {useEffect} from 'react';
-              console.log(React, useEffect);
-            `,
+						contents: inputCode,
 					};
 				}
 

@@ -23,9 +23,10 @@ export const TestEsbuildSection = memo<{ containerClassName?: string }>(
 							const inputText = inputRef.current?.value;
 							try {
 								setIsReady(false);
-								const result = await EsbuildService.transform(inputText || "");
+								// const result = await EsbuildService.transform(inputText || "");
+								const result = await EsbuildService.build(inputText || "");
 								if (!result) throw new Error("No result");
-								setCode(result.code);
+								setCode(result.outputFiles?.[0].text || "");
 							} catch (error) {
 								// TODO: handle error
 								console.log("error", error);
@@ -36,7 +37,9 @@ export const TestEsbuildSection = memo<{ containerClassName?: string }>(
 					>
 						Compile
 					</button>
-					<p className="w-full bg-slate-800 font-mono rounded-md p-2 min-h-[4rem]">{code}</p>
+					<p className="w-full bg-slate-800 font-mono rounded-md p-2 min-h-[4rem] break-words">
+						{code}
+					</p>
 				</div>
 			</div>
 		);
