@@ -7,6 +7,7 @@ export const CodeEditor = () => {
 
 	return (
 		<MonacoEditor
+			wrapperProps={{ className: "py-2 bg-white" }}
 			height="300px"
 			defaultLanguage="typescript"
 			onMount={(editor) => {
