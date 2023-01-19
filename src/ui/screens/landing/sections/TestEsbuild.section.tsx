@@ -1,6 +1,10 @@
 import { H1 } from "@/ui/components";
 import { memo, useEffect, useRef, useState } from "react";
+import Editor from "@monaco-editor/react";
+import { editor } from "monaco-editor";
+
 import { EsbuildService } from "@/services/esbuild";
+import { CodeEditor } from "./components/CodeEditor.component";
 
 // TODO: remove this after testing
 const initialInput = `import 'bulma/css/bulma.css';
@@ -45,6 +49,7 @@ export const TestEsbuildSection = memo<{ containerClassName?: string }>(
 						ref={inputRef}
 						className="w-full bg-gray-100 dark:bg-primary rounded-sm p-2 mb-2"
 					></textarea>
+					<CodeEditor />
 					<button
 						disabled={!isReady}
 						className="rounded-md bg-accent p-2 self-end disabled:bg-gray-400 disabled:text-gray-300 mb-2"
